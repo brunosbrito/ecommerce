@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { CostumerModule } from './costumer/costumer.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { JwtModule } from '@nestjs/jwt';
     JwtModule.register({}),
     AdminModule,
     AuthModule,
+    CostumerModule,
   ],
   controllers: [],
   providers: [],
