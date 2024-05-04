@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
 import { IsString, IsEmail, Matches } from 'class-validator';
 
-@Entity({ name: 'users' })
+@Entity()
 @Unique(['email'])
-export class User {
+export class Admin {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

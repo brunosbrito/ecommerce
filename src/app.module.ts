@@ -2,22 +2,26 @@ import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { UserModule } from './user/user.module';
+import { AdminModule } from './admin/admin.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3307,
-      username: 'root1',
-      password: 'password',
-      database: 'ecommerce',
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
       entities: ['dist/**/*.entity.js'],
       synchronize: true,
     }),
-    UserModule,
+    JwtModule.register({}),
+    AdminModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

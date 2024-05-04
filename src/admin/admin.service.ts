@@ -1,19 +1,18 @@
-import { BcryptService } from '../services/bcrypt.service';
+import { BcryptService } from 'src/services/bcrypt.service';
 import { Injectable } from '@nestjs/common';
-
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Admin } from './admin.entity';
 
 @Injectable()
-export class UsersService {
+export class AdminService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(Admin)
+    private readonly userRepository: Repository<Admin>,
     private readonly bcryptService: BcryptService,
   ) {}
 
-  async create(user: User): Promise<User> {
+  async create(user: Admin): Promise<Admin> {
     const hashedPassword = await this.bcryptService.hashPassword(user.password);
     const userToSave = {
       ...user,
@@ -22,7 +21,7 @@ export class UsersService {
     return await this.userRepository.save(userToSave);
   }
 
-  async update(id: string, updatedUserData: Partial<User>): Promise<User> {
+  async update(id: string, updatedUserData: Partial<Admin>): Promise<Admin> {
     const userToUpdate = await this.userRepository.findOne({ where: { id } });
     if (!userToUpdate) {
       throw new Error('User not found');
@@ -32,7 +31,7 @@ export class UsersService {
     return await this.userRepository.save(updatedUser);
   }
 
-  async findByEmail(email: string): Promise<User | undefined> {
+  async findByEmail(email: string): Promise<Admin | undefined> {
     return await this.userRepository.findOne({ where: { email } });
   }
 }
