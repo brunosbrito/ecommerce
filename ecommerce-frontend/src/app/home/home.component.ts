@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ItemCardComponent } from '../item-card/item-card.component';
 import { ComboCardComponent } from '../combo-card/combo-card.component';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatTabsModule, ItemCardComponent, ComboCardComponent],
+  imports: [MatTabsModule, ItemCardComponent, ComboCardComponent, NavBarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
