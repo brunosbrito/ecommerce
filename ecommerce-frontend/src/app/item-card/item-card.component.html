@@ -1,0 +1,12 @@
+<div class="content">
+  <mat-card class="item-card" *ngFor="let item of items">
+    <mat-card-content>
+      <h2 mat-card-title>{{ item.name }}</h2>
+      <p mat-card-subtitle>{{ item.description }}</p>
+      <p class="price" >Valor: ${{ item.price }}</p>
+    </mat-card-content>
+    <mat-card-actions class="div-btn">
+      <button mat-raised-button color="primary" (click)="addToCart(item)">Adicionar ao carrinho</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
