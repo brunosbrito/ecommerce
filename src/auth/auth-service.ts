@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserValidationService } from './user-validation.service';
 import { LoginDto } from './dto/login.dto';
@@ -27,6 +27,15 @@ export class AuthService {
       };
     }
 
-    return { message: 'Invalid credentials' };
+    return { message: 'Credenciais inválidas' };
+  }
+
+  async verifyToken(token: string): Promise<any> {
+    try {
+      const decodedToken = this.jwtService.verify(token);
+      return decodedToken;
+    } catch (error) {
+      throw new UnauthorizedException('Token inválido ou expirado');
+    }
   }
 }

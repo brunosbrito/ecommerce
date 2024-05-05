@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { CostumerModule } from './costumer/costumer.module';
+import { ProductsModule } from './products/products.module';
+import { CombosModule } from './combos/combos.module';
+import { ServiceRegistryModule } from './service-registry/service-registry.module';
 
 @Module({
   imports: [
@@ -24,8 +26,9 @@ import { CostumerModule } from './costumer/costumer.module';
     AdminModule,
     AuthModule,
     CostumerModule,
+    ProductsModule,
+    CombosModule,
+    ServiceRegistryModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
