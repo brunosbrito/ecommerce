@@ -2,12 +2,6 @@
   max-width: 400px;
   margin: 10px;
 }
-
-.price {
-  color: #007bff;
-  font-weight: bold;
-}
-
 .content {
   display: flex;
   padding: 20px;

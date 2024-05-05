@@ -4,3 +4,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .div-btn {
   margin: 10px auto;
 }
+
+.price {
+  color: #03770c;
+  font-weight: bold;
+}

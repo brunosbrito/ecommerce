@@ -3,7 +3,7 @@
     <mat-card-content>
       <h2 mat-card-title>{{ item.name }}</h2>
       <p mat-card-subtitle>{{ item.description }}</p>
-      <p class="price" >Valor: ${{ item.price }}</p>
+      <p class="price" >Valor: {{ item.price | currency:'BRL':'symbol':'1.2-2' }}</p>
     </mat-card-content>
     <mat-card-actions class="div-btn">
       <button mat-raised-button color="primary" (click)="addToCart(item)">Adicionar ao carrinho</button>

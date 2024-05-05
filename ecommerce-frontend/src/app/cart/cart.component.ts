@@ -29,7 +29,6 @@ export class CartComponent implements OnInit {
   }
 
   checkout(): void {
-    // Implemente aqui a lógica para finalizar a compra
     console.log('Finalizando compra...');
   }
 
