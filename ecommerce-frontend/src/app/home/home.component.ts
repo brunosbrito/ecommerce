@@ -1,17 +1,22 @@
 import { Component } from '@angular/core';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ItemCardComponent } from '../item-card/item-card.component';
 import { ComboCardComponent } from '../combo-card/combo-card.component';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatTabsModule, ItemCardComponent, ComboCardComponent, NavBarComponent],
+  imports: [ MatFormFieldModule, MatTabsModule, ItemCardComponent, ComboCardComponent, NavBarComponent, MatInputModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
+  cep: string = '';
    products = [
     {
       id: 1,
@@ -54,4 +59,11 @@ export class HomeComponent {
       ]
     }
   ];
+
+  formatCep() {
+    this.cep = this.cep.replace(/\D/g, '');
+    if (this.cep.length > 5) {
+      this.cep = this.cep.substring(0, 5) + '-' + this.cep.substring(5, 8);
+    }
+  }
 }

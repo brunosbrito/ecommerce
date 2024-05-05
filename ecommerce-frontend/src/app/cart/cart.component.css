@@ -34,6 +34,12 @@
   margin-right: 10px;
 }
 
+.total {
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 1.4rem;
+}
+
 .item-price {
   font-size: 18px;
 }

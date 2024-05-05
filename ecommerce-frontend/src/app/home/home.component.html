@@ -1,5 +1,15 @@
 <app-nav-bar></app-nav-bar>
+
+<div class="div-cep">
+    <h2>Por favor digite seu CEP para verificar os Combos, servicos e produtos disponivel na sua regiao</h2>
+    <mat-form-field class="example-full-width">
+      <mat-label>CEP</mat-label>
+      <input matInput maxlength="9"  type="text" [(ngModel)]="cep" (input)="formatCep()">
+    </mat-form-field>
+</div>
+
 <div>
+
   <mat-tab-group class="tabs">
     <mat-tab label="Combos"><app-combo-card [combos]="combos"></app-combo-card></mat-tab>
 
