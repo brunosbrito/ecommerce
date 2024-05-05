@@ -1,1 +1,26 @@
-<p>cart works!</p>
+<app-nav-bar></app-nav-bar>
+<div class="cart-container">
+  <h2 class="cart-title">Carrinho</h2>
+
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <ul class="cart-items">
+      <li *ngFor="let item of cartItems" class="cart-item">
+        <div class="item-details">
+          <span class="item-name">{{ item.name }}</span>
+          <span class="item-price">{{ item.price | currency:'BRL':'symbol':'1.2-2' }}</span>
+        </div>
+        <div class="item-actions">
+          <button mat-raised-button color="warn" (click)="removeItem(item)">Remover</button>
+        </div>
+      </li>
+    </ul>
+    <div class="div-comprar">
+      <span class="item-price">Total Carrinho: {{ total | currency:'BRL':'symbol':'1.2-2' }}</span>
+      <button mat-raised-button  color="primary" (click)="checkout()">Finalizar Compra</button>
+    </div>
+
+  </div>
+  <ng-template #emptyCart>
+    <p class="empty-cart-message">Seu carrinho está vazio.</p>
+  </ng-template>
+</div>
