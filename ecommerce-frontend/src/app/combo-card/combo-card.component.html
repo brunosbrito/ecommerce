@@ -4,9 +4,17 @@
       <h2 mat-card-title>{{ combo.name }}</h2>
       <p mat-card-subtitle>{{ combo.description }}</p>
 
-      <div *ngFor="let item of combo.items">
-        <h3>{{ item.name }}</h3>
+      <mat-divider></mat-divider>
+      <h3>Serviços</h3>
+      <div *ngFor="let service of combo.serviceRegistries">
+        <h4>{{ service.name }}</h4>
       </div>
+      <mat-divider></mat-divider>
+      <h3>Produtos</h3>
+      <div *ngFor="let product of combo.products">
+        <h4>{{ product.name }}</h4>
+      </div>
+      <mat-divider></mat-divider>
       <p class="price">Valor: {{ combo.price | currency:'BRL':'symbol':'1.2-2' }}</p>
     </mat-card-content>
     <mat-card-actions  class="div-btn">

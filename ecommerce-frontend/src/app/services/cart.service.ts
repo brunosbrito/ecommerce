@@ -28,7 +28,7 @@ export class CartService {
     } else {
       this.cart = [];
     }
-
+    this.updateItemsCart();
     return this.cart
   }
 
@@ -59,5 +59,9 @@ export class CartService {
 
   getItemCart(): BehaviorSubject<number> {
     return this.quantityItemsCart;
+  }
+
+  ClearCart(): void {
+    localStorage.clear();
   }
 }

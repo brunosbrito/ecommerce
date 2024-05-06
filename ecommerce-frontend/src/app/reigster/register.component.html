@@ -1,0 +1,86 @@
+<div style="padding: 3%;padding-left: 38%;">
+
+  <div *ngIf="!registerSuccess">
+    <form class="form-register" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <H2>CADASTRO DE CONTA</H2>
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name">
+        <mat-error >
+          Nome obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error>
+          Email obrigatório
+        </mat-error>
+        <mat-error>
+          Email invalido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="password" type="password">
+        <mat-error>
+          Senha obrigatorio
+        </mat-error>
+        <mat-error>
+          Senha precisa ser no minimo com 6 caractes
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Idade</mat-label>
+        <input matInput formControlName="age">
+        <mat-error>
+          Idade obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>CEP</mat-label>
+        <input matInput formControlName="zipCode" (input)="formatCep()">
+        <mat-error>
+          Cep obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Endereco</mat-label>
+        <input matInput placeholder="Endereco" formControlName="address">
+        <mat-error>
+         Endereco obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <input matInput formControlName="state">
+        <mat-error>
+          Estado obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="city">
+        <mat-error>
+          Cidade obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="registrationForm.invalid">Cadastrar</button>
+    </form>
+  </div>
+  <div *ngIf="registerSuccess">
+    <p>Usuário cadastrado com sucesso!</p>
+    <button mat-raised-button color="primary" (click)="returnLogin()">OK</button>
+  </div>
+</div>
+
+
+

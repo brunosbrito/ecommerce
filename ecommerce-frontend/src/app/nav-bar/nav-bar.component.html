@@ -1,11 +1,14 @@
 <nav class="navbar">
   <div class="container">
     <div class="nav-links">
-      <a class="logo" href="/">ECOMMERCE</a>
+      <div class="div-logo">
+        <a class="logo" href="/">ECOMMERCE</a>
+        <img src="../../assets/carrinho.png" alt="Logo carrinho">
+      </div>
     </div>
     <div class="nav-links" style="margin-left: 20px;">
-      <a href="/login">Login</a>
-      <a href="/carrinho" matBadge="{{ quantityItemsCart }}" matBadgeOverlap="false" matBadgeColor="warn" class="demo-section">Carrinho</a>
+      <a *ngIf="!login" href="/login">Login</a>
+      <a href="/carrinho" matBadge="{{ quantityItemsCart }}" matBadgeOverlap="false" matBadgeColor="warn"  class="demo-section">Carrinho</a>
     </div>
   </div>
 </nav>

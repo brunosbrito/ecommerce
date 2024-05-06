@@ -1,8 +1,10 @@
 
 .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: 75%;
 }
 
 .navbar {
@@ -20,4 +22,22 @@
   color: #fff;
   text-decoration: none;
   margin-left: 20px;
+}
+
+img {
+  width: 80px;
+}
+
+.div-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div-carringho {
+  display: flex;
+  align-items: center;
+}
+.img-carrinho {
+  width: 40px;
 }

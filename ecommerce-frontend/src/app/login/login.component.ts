@@ -5,6 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { Subject, merge, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../services/auth.service';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,7 @@ export class LoginComponent {
   errorMessage = '';
   errorMessagePassword = '';
 
-  constructor() {
+  constructor(private readonly authService: AuthService, private readonly router: Router ) {
     merge(
       this.email.statusChanges,
       this.email.valueChanges,
@@ -51,9 +53,18 @@ export class LoginComponent {
     }
   }
 
-
   login(): void {
-    console.log('E-mail:', this.email);
+    const emailValue = this.email.value ;
+    const passwordValue = this.password.value;
+
+    this.authService.login(emailValue!, passwordValue!).subscribe({
+      next: () => {
+        this.router.navigate(['']);
+      },
+      error: error => {
+        console.error('Erro ao fazer login:', error);
+      }
+    });
   }
 }
 
