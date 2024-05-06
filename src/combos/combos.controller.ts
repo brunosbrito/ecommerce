@@ -8,7 +8,7 @@ import { ApiTags, ApiBody, ApiResponse, ApiParam } from '@nestjs/swagger';
 @Controller('combos')
 export class CombosController {
   constructor(private readonly combosService: CombosService) {}
-  @Get()
+  @Get('all')
   @ApiResponse({
     status: 201,
     description: 'Combos obtidos com sucesso',

@@ -89,6 +89,9 @@ export class CombosService {
   }
 
   async getByCity(city: string): Promise<Combo[]> {
+    if (city == '') {
+      return [];
+    }
     return this.comboRepository.find({
       where: { city: Like(`%${city}%`) },
       relations: ['products', 'serviceRegistries'],
