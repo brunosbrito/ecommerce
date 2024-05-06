@@ -3,7 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
