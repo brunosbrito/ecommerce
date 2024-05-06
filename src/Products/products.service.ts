@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Product } from './product.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -30,5 +30,14 @@ export class ProductsService {
 
   async getAll(): Promise<Product[]> {
     return await this.productRepository.find();
+  }
+
+  async getByCity(city: string): Promise<Product[]> {
+    if (city == '') {
+      return [];
+    }
+    return this.productRepository.find({
+      where: { city: Like(`%${city}%`) },
+    });
   }
 }

@@ -1,16 +1,30 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ServiceRegistryService } from './service-registry.service';
 import { ServiceRegistry } from './service-registry.entity';
-import { ApiTags, ApiBody, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiBody,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 
 @ApiTags('service-registry')
 @Controller('service-registry')
 export class ServiceRegistryController {
   constructor(private readonly serviceRegistry: ServiceRegistryService) {}
 
-  @Get()
+  @Get('all')
   async findAll() {
     return await this.serviceRegistry.getAll();
+  }
+
+  @Get(':city')
+  @ApiParam({ name: 'city', description: 'Busca produtos por cidade' })
+  async getCombosByCity(
+    @Param('city') city: string,
+  ): Promise<ServiceRegistry[]> {
+    return this.serviceRegistry.getByCity(city);
   }
 
   @Post('create')

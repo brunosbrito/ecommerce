@@ -1,21 +1,26 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Product } from './product.entity';
-import { AuthMiddleware } from 'src/auth/auth-middleware';
-import { ApiTags, ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiBody, ApiResponse, ApiParam } from '@nestjs/swagger';
 
 @Controller('products')
 @ApiTags('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @Get()
+  @Get('all')
   @ApiResponse({
     status: 201,
     description: 'Produtos obtidos com sucesso',
   })
   async findAll() {
     return await this.productsService.getAll();
+  }
+
+  @Get(':city')
+  @ApiParam({ name: 'city', description: 'Busca produtos por cidade' })
+  async getCombosByCity(@Param('city') city: string): Promise<Product[]> {
+    return this.productsService.getByCity(city);
   }
 
   @Post()

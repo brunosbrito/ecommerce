@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ServiceRegistry } from './service-registry.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 @Injectable()
 export class ServiceRegistryService {
@@ -31,5 +31,14 @@ export class ServiceRegistryService {
 
   async getAll(): Promise<ServiceRegistry[]> {
     return await this.serviceRegistryRepository.find();
+  }
+
+  async getByCity(city: string): Promise<ServiceRegistry[]> {
+    if (city == '') {
+      return [];
+    }
+    return this.serviceRegistryRepository.find({
+      where: { city: Like(`%${city}%`) },
+    });
   }
 }
