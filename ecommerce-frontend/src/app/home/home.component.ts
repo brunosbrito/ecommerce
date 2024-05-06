@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   products: Product[] = [];
   services: ServiceRegistry[] = [];
   cep: string = '';
-  city: string = '';
 
   constructor(private combosService: CombosService,
     private productService: ProductsService,
@@ -34,7 +33,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCombosByCity(this.city);
   }
 
   getCombosByCity(city: string): void {
@@ -90,8 +88,8 @@ export class HomeComponent implements OnInit {
 
       .subscribe({
         next: (data) => {
-          this.city = data.localidade
-          this.getCombosByCity(data.localidade.toLowerCase());
+          const city = data.localidade
+          this.getCombosByCity(city.toLowerCase());
         },
         error: (error) => {
           console.error('Erro ao buscar Servicos por cidade:', error);
@@ -99,7 +97,7 @@ export class HomeComponent implements OnInit {
       });
 
     } else {
-      this.city = '';
+      this.getCombosByCity('');
     }
   }
 

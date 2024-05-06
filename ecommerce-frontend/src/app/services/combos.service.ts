@@ -11,7 +11,7 @@ export class CombosService {
   constructor(private http: HttpClient) {}
 
   getCombosByCity(city: string): Observable<Combo[]> {
-    return this.http.get<Combo[]>(`${this.apiUrl}/combos?city=${city}`);
+    return this.http.get<Combo[]>(`${this.apiUrl}/combos/${city}`);
   }
 
 }
