@@ -1,12 +1,12 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { Custumer } from './custumer.entity';
-import { CostumerService } from './costumer.service';
+import { CustumerService } from './costumer.service';
 import { ApiTags, ApiBody, ApiResponse } from '@nestjs/swagger';
 
 @ApiTags('costumer')
 @Controller('cadastro')
 export class CostumerController {
-  constructor(private readonly costumerService: CostumerService) {}
+  constructor(private readonly costumerService: CustumerService) {}
 
   @Post()
   @ApiBody({

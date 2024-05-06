@@ -24,7 +24,8 @@ export class AuthController {
     description: 'Admin logado com sucesso e um token foi retornado',
   })
   async adminLogin(@Body() loginDto: LoginDto) {
-    return this.authService.login(loginDto);
+    const type = 'admin';
+    return this.authService.login(loginDto, type);
   }
 
   @ApiBody({
@@ -43,6 +44,7 @@ export class AuthController {
   })
   @Post('login')
   async userLogin(@Body() loginDto: LoginDto) {
-    return this.authService.login(loginDto);
+    const type = 'customer';
+    return this.authService.login(loginDto, type);
   }
 }

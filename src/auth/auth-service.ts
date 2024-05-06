@@ -10,16 +10,17 @@ export class AuthService {
     private readonly userValidationService: UserValidationService,
   ) {}
 
-  async login(loginDto: LoginDto) {
+  async login(loginDto: LoginDto, type: string) {
     const user = await this.userValidationService.validateUser(
       loginDto.email,
       loginDto.password,
+      type,
     );
 
     const token = await this.createdToken(user);
 
     if (user) {
-      return { access_token: token };
+      return { access_token: token, id: user.id };
     } else {
       return { message: 'Credenciais inválidas' };
     }

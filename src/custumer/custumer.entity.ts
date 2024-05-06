@@ -25,7 +25,7 @@ export class Custumer {
 
   @Column()
   @IsString()
-  adress: string;
+  address: string;
 
   @Column()
   @IsString()
