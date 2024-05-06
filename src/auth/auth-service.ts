@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserValidationService } from './user-validation.service';
 import { LoginDto } from './dto/login.dto';
@@ -16,26 +16,22 @@ export class AuthService {
       loginDto.password,
     );
 
+    const token = await this.createdToken(user);
+
     if (user) {
-      const payload = { email: user.email, sub: user.id };
-      const jwtConfig = {
-        secret: process.env.JWT_SECRET,
-      };
-
-      return {
-        access_token: this.jwtService.sign(payload, jwtConfig),
-      };
+      return { access_token: token };
+    } else {
+      return { message: 'Credenciais inválidas' };
     }
-
-    return { message: 'Credenciais inválidas' };
   }
 
-  async verifyToken(token: string): Promise<any> {
-    try {
-      const decodedToken = this.jwtService.verify(token);
-      return decodedToken;
-    } catch (error) {
-      throw new UnauthorizedException('Token inválido ou expirado');
-    }
+  private createdToken(user): string {
+    const payload = { email: user.email, id: user.id };
+    const jwtConfig = {
+      secret: process.env.JWT_SECRET,
+      expiresIn: '5h',
+    };
+    const token = this.jwtService.sign(payload, jwtConfig);
+    return token;
   }
 }

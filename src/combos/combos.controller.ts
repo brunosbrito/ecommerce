@@ -4,6 +4,7 @@ import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { Combo } from './combo.entity';
 import { ApiTags, ApiBody, ApiResponse, ApiParam } from '@nestjs/swagger';
 
+@UseGuards(AuthMiddleware)
 @ApiTags('combos')
 @Controller('combos')
 export class CombosController {
@@ -41,7 +42,6 @@ export class CombosController {
     status: 201,
     description: 'Combos cadastrado com sucesso',
   })
-  @UseGuards(AuthMiddleware)
   async createProduct(@Body() comboData: Combo) {
     return await this.combosService.create(comboData);
   }

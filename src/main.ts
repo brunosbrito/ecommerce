@@ -11,17 +11,16 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
+
   const config = new DocumentBuilder()
     .setTitle('Ecommerce')
-    .setDescription(
-      '!!!!! ATENCAO: AQUI ESTA ALGUNS NUMERO PARA COLOCAR NO CAMPO CITY DE PRODUTOS, COMBOS E SERVICOS: Betim, Contagem, Belo Horizonte, Campo Belo',
-    )
+    .setDescription('api ecommerce')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('eccomerce')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
   await app.listen(3000);
 }
 bootstrap();

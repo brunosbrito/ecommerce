@@ -1,7 +1,13 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Product } from './product.entity';
-import { ApiTags, ApiBody, ApiResponse, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiBody,
+  ApiResponse,
+  ApiParam,
+  ApiOperation,
+} from '@nestjs/swagger';
 
 @Controller('products')
 @ApiTags('products')
@@ -23,7 +29,12 @@ export class ProductsController {
     return this.productsService.getByCity(city);
   }
 
-  @Post()
+  @Post('create')
+  @ApiOperation({
+    summary: 'endpoint para cadastrar produtos',
+    description:
+      'no campo city e uma string como nome da cidade, podendo inserir mais de uma separando por (,)',
+  })
   @ApiBody({
     schema: {
       type: 'object',
@@ -34,6 +45,7 @@ export class ProductsController {
         price: { type: 'number' },
       },
       required: ['name', 'city', 'description', 'price'],
+      description: 'teste',
     },
   })
   @ApiResponse({

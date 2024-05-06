@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AdminModule } from './admin/admin.module';
@@ -8,6 +8,7 @@ import { CustumerModule } from './custumer/custumer.module';
 import { ProductsModule } from './products/products.module';
 import { CombosModule } from './combos/combos.module';
 import { ServiceRegistryModule } from './service-registry/service-registry.module';
+import { AuthMiddleware } from './auth/auth-middleware';
 
 @Module({
   imports: [
@@ -32,9 +33,9 @@ import { ServiceRegistryModule } from './service-registry/service-registry.modul
   ],
 })
 export class AppModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer.apply(AuthMiddleware).forRoutes('products/create');
-  //   consumer.apply(AuthMiddleware).forRoutes('service-registry/create');
-  //   consumer.apply(AuthMiddleware).forRoutes('combos/create');
-  // }
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes('products/create');
+    consumer.apply(AuthMiddleware).forRoutes('service-registry/create');
+    consumer.apply(AuthMiddleware).forRoutes('combos/create');
+  }
 }
