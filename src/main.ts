@@ -6,10 +6,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('Ecommerce')
+    .setDescription(
+      '!!!!! ATENCAO: AQUI ESTA ALGUNS NUMERO PARA COLOCAR NO CAMPO CITY DE PRODUTOS, COMBOS E SERVICOS: Betim, Contagem, Belo Horizonte, Campo Belo',
+    )
     .setVersion('1.0')
-    .addTag('cats')
+    .addTag('eccomerce')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

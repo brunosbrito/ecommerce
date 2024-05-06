@@ -8,5 +8,6 @@ services:
       - 33070:33060
     environment:
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_AUTHENTICATION_PLUGIN: mysql_native_password
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql

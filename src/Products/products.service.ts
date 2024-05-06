@@ -10,20 +10,21 @@ export class ProductsService {
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  async create(product: Product): Promise<string> {
+  async create(productData: Partial<Product>): Promise<string> {
     if (
-      !product.name ||
-      !product.price ||
-      !product.description ||
-      !product.city
+      !productData.name ||
+      !productData.price ||
+      !productData.description ||
+      !productData.city
     ) {
       throw new BadRequestException(
         'Todos os campos obrigatórios devem ser fornecidos',
       );
     }
 
-    await this.productRepository.save(product);
-
+    productData.city = productData.city.toLowerCase();
+    const product = this.productRepository.create(productData);
+    this.productRepository.save(product);
     return 'Produto criado com sucesso';
   }
 

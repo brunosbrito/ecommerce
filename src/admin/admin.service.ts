@@ -12,23 +12,15 @@ export class AdminService {
     private readonly bcryptService: BcryptService,
   ) {}
 
-  async create(user: Admin): Promise<Admin> {
+  async create(user: Admin): Promise<string> {
     const hashedPassword = await this.bcryptService.hashPassword(user.password);
     const userToSave = {
       ...user,
       password: hashedPassword,
     };
-    return await this.userRepository.save(userToSave);
-  }
+    await this.userRepository.save(userToSave);
 
-  async update(id: string, updatedUserData: Partial<Admin>): Promise<Admin> {
-    const userToUpdate = await this.userRepository.findOne({ where: { id } });
-    if (!userToUpdate) {
-      throw new Error('User not found');
-    }
-
-    const updatedUser = Object.assign(userToUpdate, updatedUserData);
-    return await this.userRepository.save(updatedUser);
+    return 'Usuario Administador criado com sucesso';
   }
 
   async findByEmail(email: string): Promise<Admin | undefined> {

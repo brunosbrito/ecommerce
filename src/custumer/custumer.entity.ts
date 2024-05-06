@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
-import { IsString, IsEmail, Matches, IsNumber } from 'class-validator';
+import { IsString, IsEmail, IsNumber } from 'class-validator';
 
 @Entity()
 @Unique(['email'])
-export class Costumer {
+export class Custumer {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -17,10 +17,6 @@ export class Costumer {
 
   @Column()
   @IsString()
-  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
-    message:
-      'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number',
-  })
   password: string;
 
   @Column()

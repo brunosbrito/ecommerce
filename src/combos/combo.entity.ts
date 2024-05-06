@@ -1,4 +1,4 @@
-import { ServiceRegistry } from './../service-registry/service-registry.entity';
+import { ServiceRegistry } from 'src/service-registry/service-registry.entity';
 import { Product } from 'src/products/product.entity';
 import {
   Entity,
@@ -16,11 +16,17 @@ export class Combo {
   @Column()
   name: string;
 
-  @ManyToMany(() => Product)
+  @ManyToMany(() => Product, { nullable: true })
   @JoinTable()
   products: Product[];
 
-  @ManyToMany(() => ServiceRegistry)
+  @ManyToMany(() => ServiceRegistry, { nullable: true })
   @JoinTable()
   serviceRegistries: ServiceRegistry[];
+
+  @Column()
+  price: number;
+
+  @Column()
+  city: string;
 }

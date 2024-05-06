@@ -2,28 +2,28 @@ import { BcryptService } from 'src/services/bcrypt.service';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Costumer } from './costumer.entity';
+import { Custumer } from './custumer.entity';
 
 @Injectable()
 export class CostumerService {
   constructor(
-    @InjectRepository(Costumer)
-    private readonly costumerRepository: Repository<Costumer>,
+    @InjectRepository(Custumer)
+    private readonly custumerRepository: Repository<Custumer>,
     private readonly bcryptService: BcryptService,
   ) {}
 
-  async create(costumer: Costumer): Promise<Costumer> {
+  async create(custumer: Custumer): Promise<Custumer> {
     const hashedPassword = await this.bcryptService.hashPassword(
-      costumer.password,
+      custumer.password,
     );
     const userToSave = {
-      ...costumer,
+      ...custumer,
       password: hashedPassword,
     };
-    return await this.costumerRepository.save(userToSave);
+    return await this.custumerRepository.save(userToSave);
   }
 
-  async findByEmail(email: string): Promise<Costumer | undefined> {
-    return await this.costumerRepository.findOne({ where: { email } });
+  async findByEmail(email: string): Promise<Custumer | undefined> {
+    return await this.custumerRepository.findOne({ where: { email } });
   }
 }

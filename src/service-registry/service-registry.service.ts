@@ -10,18 +10,20 @@ export class ServiceRegistryService {
     private readonly serviceRegistryRepository: Repository<ServiceRegistry>,
   ) {}
 
-  async create(serviceRegistry: ServiceRegistry): Promise<string> {
+  async create(serviceRegistryData: Partial<ServiceRegistry>): Promise<string> {
     if (
-      !serviceRegistry.name ||
-      !serviceRegistry.price ||
-      !serviceRegistry.description ||
-      !serviceRegistry.city
+      !serviceRegistryData.name ||
+      !serviceRegistryData.price ||
+      !serviceRegistryData.description ||
+      !serviceRegistryData.city
     ) {
       throw new BadRequestException(
         'Todos os campos obrigatórios devem ser fornecidos',
       );
     }
-
+    serviceRegistryData.city = serviceRegistryData.city.toLowerCase();
+    const serviceRegistry =
+      this.serviceRegistryRepository.create(serviceRegistryData);
     await this.serviceRegistryRepository.save(serviceRegistry);
 
     return 'Serviço criado com sucesso';

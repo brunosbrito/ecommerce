@@ -1,20 +1,21 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
-import { CostumerModule } from './costumer/costumer.module';
+import { CustumerModule } from './custumer/custumer.module';
 import { ProductsModule } from './products/products.module';
 import { CombosModule } from './combos/combos.module';
 import { ServiceRegistryModule } from './service-registry/service-registry.module';
+import { AuthMiddleware } from './auth/auth-middleware';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST,
+      host: 'localhost',
       port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
@@ -25,10 +26,16 @@ import { ServiceRegistryModule } from './service-registry/service-registry.modul
     JwtModule.register({}),
     AdminModule,
     AuthModule,
-    CostumerModule,
+    CustumerModule,
     ProductsModule,
     CombosModule,
     ServiceRegistryModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer.apply(AuthMiddleware).forRoutes('products/create');
+  //   consumer.apply(AuthMiddleware).forRoutes('service-registry/create');
+  //   consumer.apply(AuthMiddleware).forRoutes('combos/create');
+  // }
+}

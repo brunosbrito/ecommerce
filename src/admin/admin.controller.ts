@@ -1,21 +1,30 @@
-import { Controller, Post, Body, Param, Put } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { Admin } from './admin.entity';
+import { ApiTags, ApiBody, ApiResponse } from '@nestjs/swagger';
 
+@ApiTags('admin')
 @Controller('admin')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
   @Post()
-  async createAdmin(@Body() admin: Admin): Promise<Admin> {
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        email: { type: 'string', format: 'email' },
+        password: { type: 'string', format: 'password' },
+      },
+      required: ['name', 'email', 'password'],
+    },
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Admin criado com sucesso',
+  })
+  async createAdmin(@Body() admin: Admin): Promise<string> {
     return await this.adminService.create(admin);
-  }
-
-  @Put(':id')
-  async updateAdmin(
-    @Param('id') id: string,
-    @Body() admin: Admin,
-  ): Promise<Admin> {
-    return await this.adminService.update(id, admin);
   }
 }

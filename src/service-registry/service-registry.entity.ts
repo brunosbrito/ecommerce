@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Combo } from 'src/combos/combo.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 @Entity()
 export class ServiceRegistry {
@@ -9,11 +16,15 @@ export class ServiceRegistry {
   name: string;
 
   @Column()
-  city: number[];
+  city: string;
 
   @Column()
   description: string;
 
   @Column()
   price: number;
+
+  @ManyToMany(() => Combo)
+  @JoinTable()
+  combos: Combo[];
 }
