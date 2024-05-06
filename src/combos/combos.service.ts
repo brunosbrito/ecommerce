@@ -76,7 +76,6 @@ export class CombosService {
 
     if (combo.serviceRegistries && combo.serviceRegistries.length > 0) {
       for (const serviceRegistries of combo.serviceRegistries) {
-        console.log(serviceRegistries)
         await this.comboRepository
           .createQueryBuilder()
           .relation(Combo, 'serviceRegistries')
