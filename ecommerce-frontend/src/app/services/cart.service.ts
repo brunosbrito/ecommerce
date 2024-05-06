@@ -1,45 +1,45 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private cart: any[] = [];
+  private quantityItemsCart: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor() { }
+  constructor() {
+    this.getCartItems()
+    this.updateItemsCart();
+   }
 
   addToCart(item: any): void {
-    let cart: any[];
-    const cartString = localStorage.getItem('cart');
-    if (cartString !== null) {
-      cart = JSON.parse(cartString);
-    } else {
-      cart = [];
-    }
-    cart.push(item);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    this.cart = this.getCartItems();
+    this.cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+    this.updateItemsCart();
   }
 
   getCartItems(): any {
-
-    let cart: any[];
     const cartString = localStorage.getItem('cart');
     if (cartString !== null) {
-      cart = JSON.parse(cartString);
+      this.cart = JSON.parse(cartString);
     } else {
-      cart = [];
+      this.cart = [];
     }
 
-    return cart
+    return this.cart
   }
 
 
   removeItemFromCart(item: any): void {
-    let cart: any[] = this.getCartItems();
-    const index = cart.findIndex((cartItem) => cartItem.id === item.id);
+   this.cart = this.getCartItems();
+    const index = this.cart.findIndex((cartItem) => cartItem.id === item.id);
     if (index !== -1) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
+      this.cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(this.cart));
+      this.updateItemsCart();
     }
   }
 
@@ -51,5 +51,13 @@ export class CartService {
     }
 
     return total;
+  }
+
+  updateItemsCart(): void {
+    this.quantityItemsCart.next(this.cart.length);
+  }
+
+  getItemCart(): BehaviorSubject<number> {
+    return this.quantityItemsCart;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ItemCardComponent } from '../item-card/item-card.component';
 import { ComboCardComponent } from '../combo-card/combo-card.component';
@@ -10,7 +10,6 @@ import { CombosService } from '../services/combos.service';
 import { Combo, Product, ServiceRegistry } from '../../interfaces/interfaces';
 import { ProductsService } from '../services/products.service';
 import { ServicesRegistryService } from '../services/services-registry.service';
-import { Observable, catchError } from 'rxjs';
 import { ViaCepService } from '../services/via-cep.service';
 
 @Component({
@@ -20,7 +19,7 @@ import { ViaCepService } from '../services/via-cep.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   combos: Combo[] = [];
   products: Product[] = [];
   services: ServiceRegistry[] = [];
@@ -31,9 +30,6 @@ export class HomeComponent implements OnInit {
     private servicesRegistryService: ServicesRegistryService,
     private viaCepService: ViaCepService
   ) {}
-
-  ngOnInit(): void {
-  }
 
   getCombosByCity(city: string): void {
     this.combosService.getCombosByCity(city)
@@ -88,8 +84,10 @@ export class HomeComponent implements OnInit {
 
       .subscribe({
         next: (data) => {
-          const city = data.localidade
-          this.getCombosByCity(city.toLowerCase());
+          const city = data.localidade.toLowerCase()
+          this.getCombosByCity(city);
+          this.getProductsByCity(city);
+          this.getServicesByCity(city);
         },
         error: (error) => {
           console.error('Erro ao buscar Servicos por cidade:', error);
@@ -98,6 +96,8 @@ export class HomeComponent implements OnInit {
 
     } else {
       this.getCombosByCity('');
+      this.getProductsByCity('');
+      this.getProductsByCity('');
     }
   }
 

@@ -11,6 +11,6 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   getProductsByCity(city: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/products?city=${city}`);
+    return this.http.get<Product[]>(`${this.apiUrl}/products/${city}`);
   }
 }

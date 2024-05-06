@@ -11,6 +11,6 @@ export class ServicesRegistryService {
   constructor(private http: HttpClient) {}
 
   getServicesRegistryByCity(city: string): Observable<ServiceRegistry[]> {
-    return this.http.get<ServiceRegistry []>(`${this.apiUrl}/services-registry?city=${city}`);
+    return this.http.get<ServiceRegistry []>(`${this.apiUrl}/service-registry/${city}`);
   }
 }
