@@ -1,5 +1,5 @@
-import { ServiceRegistry } from 'src/service-registry/service-registry.entity';
-import { Product } from 'src/products/product.entity';
+import { ServiceRegistry } from '../service-registry/service-registry.entity';
+import { Product } from '../products/product.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,

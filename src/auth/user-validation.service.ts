@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Admin } from 'src/admin/admin.entity';
-import { AdminService } from 'src/admin/admin.service';
-import { CustumerService } from 'src/custumer/costumer.service';
+import { AdminService } from '../admin/admin.service';
+import { CustumerService } from '../custumer/costumer.service';
 import { Custumer } from 'src/custumer/custumer.entity';
-import { BcryptService } from 'src/services/bcrypt.service';
+import { BcryptService } from '../services/bcrypt.service';
 
 @Injectable()
 export class UserValidationService {

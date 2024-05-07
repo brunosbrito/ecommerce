@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { Combo } from './combo.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Like, Repository } from 'typeorm';
-import { Product } from 'src/products/product.entity';
-import { ServiceRegistry } from 'src/service-registry/service-registry.entity';
+import { Product } from '../products/product.entity';
+import { ServiceRegistry } from '../service-registry/service-registry.entity';
 
 @Injectable()
 export class CombosService {

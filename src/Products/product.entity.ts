@@ -1,4 +1,4 @@
-import { Combo } from 'src/combos/combo.entity';
+import { Combo } from '../combos/combo.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,

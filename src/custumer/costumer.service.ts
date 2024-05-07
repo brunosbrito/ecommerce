@@ -1,4 +1,4 @@
-import { BcryptService } from 'src/services/bcrypt.service';
+import { BcryptService } from '../services/bcrypt.service';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
