@@ -48,3 +48,4 @@ Siga as instruções abaixo para rodar o projeto em seu ambiente local:
 5. **Rode o front-end:**
    ```bash
     npm start ou ng server
+    
