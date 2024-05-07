@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" *ngIf="items.length > 0; else emptyItems">
   <mat-card class="item-card" *ngFor="let item of items">
     <mat-card-content>
       <h2 mat-card-title>{{ item.name }}</h2>
@@ -10,3 +10,6 @@
     </mat-card-actions>
   </mat-card>
 </div>
+<ng-template #emptyItems>
+  <p class="empty-message">Ops, não atendemos à sua região.</p>
+</ng-template>

@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content"  *ngIf="combos.length > 0; else emptyCombo">
   <mat-card class="item-card" *ngFor="let combo of combos">
     <mat-card-content>
       <h2 mat-card-title>{{ combo.name }}</h2>
@@ -22,4 +22,9 @@
     </mat-card-actions>
   </mat-card>
 </div>
+<ng-template #emptyCombo>
+  <p class="empty-message">Ops, não atendemos à sua região.</p>
+</ng-template>
+
+
 
