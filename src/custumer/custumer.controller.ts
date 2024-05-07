@@ -1,9 +1,9 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { Custumer } from './custumer.entity';
 import { CustumerService } from './costumer.service';
-import { ApiTags, ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiBody, ApiResponse, ApiOperation } from '@nestjs/swagger';
 
-@ApiTags('costumer')
+@ApiTags('customer')
 @Controller('cadastro')
 export class CostumerController {
   constructor(private readonly costumerService: CustumerService) {}
@@ -33,6 +33,10 @@ export class CostumerController {
         'city',
       ],
     },
+  })
+  @ApiOperation({
+    summary: 'Cadastro de Cliente',
+    description: 'Endpoint para registrar novos clientes.',
   })
   @ApiResponse({
     status: 201,

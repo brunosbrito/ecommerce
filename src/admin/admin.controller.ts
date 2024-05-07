@@ -1,7 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { Admin } from './admin.entity';
-import { ApiTags, ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiBody, ApiResponse, ApiOperation } from '@nestjs/swagger';
 
 @ApiTags('admin')
 @Controller('admin')
@@ -9,6 +9,10 @@ export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
   @Post()
+  @ApiOperation({
+    summary: 'Cadastro de Usuário Administrador',
+    description: 'Endpoint para registrar novos usuários administradores.',
+  })
   @ApiBody({
     schema: {
       type: 'object',

@@ -5,8 +5,8 @@ import {
   ApiTags,
   ApiBody,
   ApiResponse,
-  ApiBearerAuth,
   ApiParam,
+  ApiOperation,
 } from '@nestjs/swagger';
 
 @ApiTags('service-registry')
@@ -15,11 +15,19 @@ export class ServiceRegistryController {
   constructor(private readonly serviceRegistry: ServiceRegistryService) {}
 
   @Get('all')
+  @ApiOperation({
+    summary: 'Obter todos os serviços',
+    description: 'Endpoint para obter todos os serviços.',
+  })
   async findAll() {
     return await this.serviceRegistry.getAll();
   }
 
   @Get(':city')
+  @ApiOperation({
+    summary: 'Obter todos os serviços por cidade',
+    description: 'Endpoint para obter todos os serviços por cidade.',
+  })
   @ApiParam({ name: 'city', description: 'Busca produtos por cidade' })
   async getCombosByCity(
     @Param('city') city: string,
@@ -28,7 +36,6 @@ export class ServiceRegistryController {
   }
 
   @Post('create')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       type: 'object',
@@ -40,6 +47,11 @@ export class ServiceRegistryController {
       },
       required: ['name', 'city', 'description', 'price'],
     },
+  })
+  @ApiOperation({
+    summary: 'Cadastro de Serviços',
+    description:
+      'Endpoint para cadastrar novos serviços. No campo "city", insira uma string com o nome da cidade ou várias cidades separadas por vírgulas.',
   })
   @ApiResponse({
     status: 201,

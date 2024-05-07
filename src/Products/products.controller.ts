@@ -15,6 +15,10 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get('all')
+  @ApiOperation({
+    summary: 'Obter Todos os Produtos',
+    description: 'Endpoint para obter todos os produtos cadastrados.',
+  })
   @ApiResponse({
     status: 201,
     description: 'Produtos obtidos com sucesso',
@@ -24,6 +28,11 @@ export class ProductsController {
   }
 
   @Get(':city')
+  @ApiOperation({
+    summary: 'Obter Todos os Produtos por cidade',
+    description:
+      'Endpoint para obter todos os produtos cadastrados por cidade.',
+  })
   @ApiParam({ name: 'city', description: 'Busca produtos por cidade' })
   async getCombosByCity(@Param('city') city: string): Promise<Product[]> {
     return this.productsService.getByCity(city);
@@ -31,9 +40,9 @@ export class ProductsController {
 
   @Post('create')
   @ApiOperation({
-    summary: 'endpoint para cadastrar produtos',
+    summary: 'Cadastro de Produtos',
     description:
-      'no campo city e uma string como nome da cidade, podendo inserir mais de uma separando por (,)',
+      'Endpoint para cadastrar novos produtos. No campo "city", insira uma string com o nome da cidade ou várias cidades separadas por vírgulas.',
   })
   @ApiBody({
     schema: {

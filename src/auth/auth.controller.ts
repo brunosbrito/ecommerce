@@ -1,7 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { AuthService } from './auth.service';
-import { ApiTags, ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiBody, ApiResponse, ApiOperation } from '@nestjs/swagger';
 
 @ApiTags('auth')
 @Controller()
@@ -9,6 +9,10 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('admin/login')
+  @ApiOperation({
+    summary: 'Login de Administrador',
+    description: 'Endpoint para o login de administradores.',
+  })
   @ApiBody({
     schema: {
       type: 'object',
@@ -28,6 +32,11 @@ export class AuthController {
     return this.authService.login(loginDto, type);
   }
 
+  @Post('login')
+  @ApiOperation({
+    summary: 'Login de Cliente',
+    description: 'Endpoint para o login de clientes.',
+  })
   @ApiBody({
     schema: {
       type: 'object',
@@ -42,7 +51,6 @@ export class AuthController {
     status: 201,
     description: 'Cliente logado com sucesso e um token foi retornado',
   })
-  @Post('login')
   async userLogin(@Body() loginDto: LoginDto) {
     const type = 'customer';
     return this.authService.login(loginDto, type);
