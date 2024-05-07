@@ -1,10 +1,9 @@
 # Ecommerce
-
 Este é um projeto que realiza a cricao de uma api e um front end de ecommerce
 
 ## Como Rodar o Projeto
-
 Siga as instruções abaixo para rodar o projeto em seu ambiente local:
+
 #### Primeiro vamos rodar a API
 1. **Instale o Node.js:**
    Certifique-se de ter o Node.js instalado em sua máquina. Você pode baixá-lo em [https://nodejs.org/](https://nodejs.org/).
